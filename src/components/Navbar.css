@@ -1,0 +1,21 @@
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Spreads out the items */
+    align-items: center; /* Aligns items vertically in the center */
+    background-color: #0056b3; /* Adjust the background color */
+    color: white;
+    padding: 10px 20px; /* Adds padding for spacing */
+    position: fixed; /* Keeps the navbar fixed at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Makes the navbar span the entire width */
+    z-index: 1000; /* Ensures the navbar stays on top */
+}
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px; /* Adds spacing between links */
+}
+.navbar a:hover {
+    text-decoration: underline;
+}

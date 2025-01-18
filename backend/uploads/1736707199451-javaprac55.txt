@@ -1,0 +1,252 @@
+
+1.
+package myPack;
+import java.util.ArrayList;
+import java.util.*;
+
+public class ArrayListDemo {
+    public static void main(String[] args) {
+        // 1. Create an ArrayList and add elements to it
+        ArrayList<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Cherry");
+        fruits.add("Date");
+        
+        // Print the initial ArrayList
+        System.out.println("Initial ArrayList: " + fruits);
+        
+        // 2. Access elements using index-based approach
+        System.out.println("First fruit: " + fruits.get(0)); // Access by index
+        
+        // Access elements using iterator-based approach
+        System.out.println("Accessing elements using iterator:");
+        Iterator<String> iterator = fruits.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        // 3. Modify elements in the ArrayList
+        fruits.set(2, "Citrus"); // Change "Cherry" to "Citrus"
+        System.out.println("After modification: " + fruits);
+        
+        // 4. Remove elements from the ArrayList
+        fruits.remove("Banana"); // Remove "Banana"
+        System.out.println("After removing 'Banana': " + fruits);
+        
+        fruits.remove(0); // Remove element at index 0 (which is "Apple")
+        System.out.println("After removing first element: " + fruits);
+    }
+}
+
+output:
+Initial ArrayList: [Apple, Banana, Cherry, Date]
+First fruit: Apple
+Accessing elements using iterator:
+Apple
+Banana
+Cherry
+Date
+After modification: [Apple, Banana, Citrus, Date]
+After removing 'Banana': [Apple, Citrus, Date]
+After removing first element: [Citrus, Date]
+
+2.
+package myPack;
+
+
+public class LambdaStringConcate {
+    public static void main(String[] args) {
+        // Define a lambda expression for concatenating two strings
+        StringConcatenator concatenator = (str1, str2) -> str1 + str2;
+
+       
+        String string1 = "Hello, ";
+        String string2 = "World!";
+        String result = concatenator.concatenate(string1, string2);
+
+        
+        System.out.println("Concatenated String: " + result);
+    }
+
+   
+    @FunctionalInterface
+    interface StringConcatenator {
+        String concatenate(String str1, String str2);
+    }
+}
+
+op:Concatenated String: Hello, World!
+
+3.
+package myPack;
+
+interface StringLength {
+    int length(String str);
+}
+
+public class StrLength {
+	 public static void main(String[] args) {
+	        // Lambda expression to get the length of a string
+	        StringLength stringLength = str -> str.length();
+	        
+	        
+	        String example = "Hello, World!";
+	        int length = stringLength.length(example);
+	        
+	        System.out.println("The length of the string is: " + length);
+	    }
+
+}
+op:
+The length of the string is: 13
+
+4.
+package myPack;
+
+
+class Car<T> {
+ private T model;          // Generic model
+ private String companyNm; // Company name
+ private double price;     // Price of the car
+ private double engineCapacity; // Engine capacity
+
+ // Constructor
+ public Car(T model, String companyNm, double price, double engineCapacity) {
+     this.model = model;
+     this.companyNm = companyNm;
+     this.price = price;
+     this.engineCapacity = engineCapacity;
+ }
+
+ // Getters
+ public T getModel() {
+     return model;
+ }
+
+ public String getCompanyNm() {
+     return companyNm;
+ }
+
+ public double getPrice() {
+     return price;
+ }
+
+ public double getEngineCapacity() {
+     return engineCapacity;
+ }
+
+ 
+ @Override
+ public String toString() {
+     return "Car{" +
+             "model=" + model +
+             ", companyNm='" + companyNm + '\'' +
+             ", price=" + price +
+             ", engineCapacity=" + engineCapacity +
+             '}';
+ }
+}
+
+public class CarMain {
+ public static void main(String[] args) {
+     // Create instances of Car with different model types
+     Car<String> car1 = new Car<>("Model S", "Tesla", 79999.99, 2.0);
+     Car<Integer> car2 = new Car<>(12345, "Ford", 29999.99, 2.5);
+
+     // Display car information
+     System.out.println(car1);
+     System.out.println(car2);
+ }
+}
+
+op:
+Car{model=Model S, companyNm='Tesla', price=79999.99, engineCapacity=2.0}
+Car{model=12345, companyNm='Ford', price=29999.99, engineCapacity=2.5}
+
+5.
+package myPack;
+
+import java.util.HashSet;
+
+//Define the Car class
+class CarNew {
+ private String model;          // Model of the car
+ private String companyNm;      // Company name
+ private double price;          // Price of the car
+ private double engineCapacity;  // Engine capacity
+
+ // Constructor
+ public CarNew(String model, String companyNm, double price, double engineCapacity) {
+     this.model = model;
+     this.companyNm = companyNm;
+     this.price = price;
+     this.engineCapacity = engineCapacity;
+ }
+
+ // toString method for display
+ @Override
+ public String toString() {
+     return "Car{" +
+             "model='" + model + '\'' +
+             ", companyNm='" + companyNm + '\'' +
+             ", price=" + price +
+             ", engineCapacity=" + engineCapacity +
+             '}';
+ }
+}
+
+public class HashSetMain
+
+{
+ public static void main(String[] args) {
+     // Create a HashSet to store Car objects
+     HashSet<CarNew> carSet = new HashSet<>();
+
+     // Create Car objects
+     CarNew car1 = new CarNew("Model S", "Tesla", 79999.99, 2.0);
+     CarNew car2 = new CarNew("Mustang", "Ford", 55999.99, 5.0);
+     CarNew car3 = new CarNew("Civic", "Honda", 24999.99, 2.0);
+
+     // Add Car objects to the HashSet
+     carSet.add(car1);
+     carSet.add(car2);
+     carSet.add(car3);
+
+     // Display cars in the HashSet
+     System.out.println("Cars in the HashSet:");
+     for (CarNew car : carSet) {
+         System.out.println(car);
+     }
+
+     // Remove a car
+     carSet.remove(car2);
+     System.out.println("\nAfter removing Ford Mustang:");
+     for (CarNew car : carSet) {
+         System.out.println(car);
+     }
+
+     // Check if a specific car is in the set
+     if (carSet.contains(car1)) {
+         System.out.println("\nThe set contains " + car1);
+     } else {
+         System.out.println("\nThe set does not contain " + car1);
+     }
+
+     // Display the size of the HashSet
+     System.out.println("Total cars in the HashSet: " + carSet.size());
+ }
+}
+
+op:
+Cars in the HashSet:
+Car{model='Civic', companyNm='Honda', price=24999.99, engineCapacity=2.0}
+Car{model='Mustang', companyNm='Ford', price=55999.99, engineCapacity=5.0}
+Car{model='Model S', companyNm='Tesla', price=79999.99, engineCapacity=2.0}
+
+After removing Ford Mustang:
+Car{model='Civic', companyNm='Honda', price=24999.99, engineCapacity=2.0}
+Car{model='Model S', companyNm='Tesla', price=79999.99, engineCapacity=2.0}
+
+The set contains Car{model='Model S', companyNm='Tesla', price=79999.99, engineCapacity=2.0}
+Total cars in the HashSet: 2
