@@ -1,8 +1,14 @@
-# React + Vite
+Job Skills Finder & Personalized Course Recommender
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React + Vite web application that helps users search for jobs based on their skills and provides recommendations for personalized courses to enhance their expertise.
 
-Currently, two official plugins are available:
+Features
+	•	Skill-Based Job Search: Enter your skills to find relevant job opportunities.
+	•	Personalized Course Recommendations: Get tailored course suggestions to improve your skill set and stay competitive.
+	•	Fast and Efficient: Built with Vite for faster builds and improved performance.
+	•	User-Friendly Interface: Simple and intuitive UI for seamless navigation and interaction.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Tech Stack
+	•	Frontend: React
+	•	Backend: Node.js 
+	•	Database: MongoDB 
