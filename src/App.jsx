@@ -9,6 +9,7 @@ import Contact from "./components/pages/Contacts";
 import Features from "./components/pages/Features";
 import Recommendations from "./components/pages/Recommendations";
 import Courses from "./components/pages/Courses";
+import JobGapAnalysis from "./components/pages/JobGapAnalysis";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/recommendations" element={<Recommendations />} />
         <Route path="/search-courses" element={<Courses />} />
+        <Route path="/jobgap" element={<JobGapAnalysis />} />
       </Routes>
     </Router>
   );

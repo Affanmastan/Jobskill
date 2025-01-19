@@ -30,7 +30,7 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/");
+    navigate("/"); 
   };
 
   const handleChange = (e) => {
@@ -44,7 +44,6 @@ const Dashboard = () => {
     setIsSubmitting(true);
 
     try {
-      // Save the user data to MongoDB
       const saveResponse = await axios.post(
         "http://localhost:5000/api/save-user-data",
         formData,
@@ -58,7 +57,6 @@ const Dashboard = () => {
       if (saveResponse.data.success) {
         setStatusMessage("User Data Submitted Successfully!");
 
-        // Redirect after 5 seconds
         setTimeout(() => {
           navigate("/recommendations", { state: { skills: formData.skills.split(",") } });
         }, 5000);
@@ -78,29 +76,36 @@ const Dashboard = () => {
   };
 
   const handleSearchCourses = () => {
-    navigate("/search-courses"); // Navigate to the page where courses are searched
+    navigate("/search-courses");
+  };
+
+  const handleJobGap = () => {
+    navigate("/jobgap"); // Navigate to the "Job Gap" page
   };
 
   return (
     <div style={styles.container}>
-      {/* Welcome message at the top */}
       <div style={styles.welcomeBox}>
         <h1 style={styles.welcomeText}>Welcome to Your Dashboard</h1>
       </div>
 
-      {/* Display email at the top */}
       <div style={styles.emailBox}>
         <p style={styles.emailText}>Logged In as: {email}</p>
       </div>
 
       <div style={styles.dashboardBox}>
-        {/* Buttons to show form or navigate to courses search */}
         <div style={styles.buttonContainer}>
-          <button onClick={handleShowForm} style={styles.formButton}>Search Job</button>
-          <button onClick={handleSearchCourses} style={styles.searchButton}>Search Courses</button>
+          <div style={styles.cardButton} onClick={handleShowForm}>
+            <p style={styles.cardText}>Search Job</p>
+          </div>
+          <div style={styles.cardButton} onClick={handleSearchCourses}>
+            <p style={styles.cardText}>Search Courses</p>
+          </div>
+          <div style={styles.cardButton} onClick={handleJobGap}>
+            <p style={styles.cardText}>Job Gap</p>
+          </div>
         </div>
 
-        {/* Show the form only if the user clicked "Show Form" */}
         {formVisible && (
           <div style={styles.formContainer}>
             <hr style={styles.divider} />
@@ -171,7 +176,6 @@ const Dashboard = () => {
         )}
       </div>
 
-      {/* Logout Button at the bottom */}
       <button style={styles.logoutButton} onClick={handleLogout}>
         Logout
       </button>
@@ -242,25 +246,26 @@ const styles = {
     gap: "15px",
     justifyContent: "center",
   },
-  formButton: {
-    padding: "14px 25px",
+  cardButton: {
+    width: "200px",
+    height: "120px",
     backgroundColor: "#4CAF50",
     color: "#fff",
-    border: "none",
-    borderRadius: "6px",
+    borderRadius: "8px",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     cursor: "pointer",
-    fontSize: "16px",
-    transition: "background-color 0.3s ease",
+    transition: "transform 0.3s ease, box-shadow 0.3s ease",
   },
-  searchButton: {
-    padding: "14px 25px",
-    backgroundColor: "#007bff",
-    color: "#fff",
-    border: "none",
-    borderRadius: "6px",
-    cursor: "pointer",
-    fontSize: "16px",
-    transition: "background-color 0.3s ease",
+  cardButtonHover: {
+    transform: "scale(1.05)",
+    boxShadow: "0 8px 12px rgba(0, 0, 0, 0.2)",
+  },
+  cardText: {
+    fontSize: "18px",
+    fontWeight: "bold",
   },
   divider: {
     width: "100%",

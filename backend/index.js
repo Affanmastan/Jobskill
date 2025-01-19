@@ -328,7 +328,67 @@ app.post('/api/fetch-jobs', (req, res) => {
     });
 });
 
-  
+//analysis
+// Define the Schema and Model for Job Roles based on your existing collection structure
+const jobRoleSchema = new mongoose.Schema({
+  role: String,
+  requiredSkills: [String], // Array of strings for required skills
+}, { timestamps: true }); // Optional: add timestamps for creation and update times
+
+const JobRole = mongoose.model("JobRole", jobRoleSchema);
+
+// Job Roles API to get all job roles
+app.get("/api/job-roles", async (req, res) => {
+  try {
+    // Fetch all job roles from the collection
+    const roles = await JobRole.find();
+
+    res.status(200).json({
+      success: true,
+      message: "Job roles fetched successfully!",
+      roles,
+    });
+  } catch (error) {
+    console.error("Error fetching job roles:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch job roles.",
+    });
+  }
+});
+
+//gap
+app.post("/api/job-gap", async (req, res) => {
+  const { role, userSkills } = req.body;
+
+  try {
+    // Fetch the job role from the database
+    const job = await JobRole.findOne({ role: role });
+
+    if (!job) {
+      return res.status(404).json({ error: "Job role not found" });
+    }
+
+    // Required skills for the selected job role
+    const requiredSkills = job.requiredSkills;
+
+    // Determine missing skills
+    const missingSkills = requiredSkills.filter((skill) => !userSkills.includes(skill));
+    const isCompatible = missingSkills.length === 0;
+
+    return res.json({
+      role: job.role,
+      requiredSkills,
+      userSkills,
+      missingSkills,
+      isCompatible,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error processing job gap analysis" });
+  }
+});
+
   // Scrape courses based on the skills received in the POST request
   app.post('/api/recommend-courses', async (req, res) => {
     const { skills } = req.body;
